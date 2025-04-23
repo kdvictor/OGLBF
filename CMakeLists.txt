@@ -13,7 +13,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 endif()
 
 #build thirdyParty libraries
-add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/thirdyParty")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/thirdParty")
 
 file(GLOB MAIN_SRCS "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 message("main srcs: ${MAIN_SRCS}")
