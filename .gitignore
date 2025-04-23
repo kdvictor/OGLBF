@@ -1,0 +1,5 @@
+.vs
+out
+thirdParty/include
+thirdParty/lib
+thirdParty/src
