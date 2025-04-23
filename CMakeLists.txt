@@ -12,7 +12,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	add_definitions(-D_DEBUG)
 endif()
 
-#build thirdyParty libraries
+#build thirdParty libraries
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/thirdParty")
 
 file(GLOB MAIN_SRCS "${CMAKE_CURRENT_LIST_DIR}/*.cpp")

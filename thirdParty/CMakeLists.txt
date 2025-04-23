@@ -33,7 +33,7 @@ function(buildThirdParty)
 			"${PROJECT_BINARY_DIR}/${arg_name}/src" "${CMAKE_CURRENT_LIST_DIR}/src")
 		endif()
 	else()
-		set(source_dir "${PROJECT_BINARY_DIR}/${arg_name}")
+		set(source_dir "${CMAKE_BINARY_DIR}/${arg_name}")
 		set(build_dir "${source_dir}/build")
 		message("****** cmake -S ${source_dir} -B ${build_dir} ${arg_name} ******")
 		execute_process(COMMAND ${CMAKE_COMMAND} -S ${source_dir} -B ${build_dir}
