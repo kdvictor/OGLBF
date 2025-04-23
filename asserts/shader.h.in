@@ -1,0 +1,7 @@
+#pragma once
+
+//vs
+const chat* const AMBIENT_VS = R"(@AMBIENT_VS@)";
+
+//fs
+const chat* const AMBIENT_FS = R"(@AMBIENT_FS@)";

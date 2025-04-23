@@ -15,7 +15,27 @@ endif()
 #build thirdParty libraries
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/thirdParty")
 
+#main sources
 file(GLOB MAIN_SRCS "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 message("main srcs: ${MAIN_SRCS}")
 
-add_executable(${PROJECT_NAME} ${MAIN_SRCS})
+#thirdParty sources
+file(GLOB THIRDPARTY_SOURCES "${CMAKE_CURRENT_LIST_DIR}/thirdParty/src/*")
+message("thirdyParty srcs: ${THIRDPARTY_SOURCES}")
+
+#set include dir
+include_directories(
+"${CMAKE_CURRENT_LIST_DIR}/thirdParty/include"
+)
+
+#set link dir
+link_directories(
+"${CMAKE_CURRENT_LIST_DIR}/thirdParty/lib"
+)
+
+#sub directories
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/asserts")
+
+add_executable(${PROJECT_NAME} ${MAIN_SRCS} ${THIRDPARTY_SOURCES})
+
+target_link_libraries(${PROJECT_NAME} glfw3)
