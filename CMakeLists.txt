@@ -26,6 +26,7 @@ message("thirdyParty srcs: ${THIRDPARTY_SOURCES}")
 #set include dir
 include_directories(
 "${CMAKE_CURRENT_LIST_DIR}/thirdParty/include"
+"${CMAKE_CURRENT_LIST_DIR}/asserts/include"
 )
 
 #set link dir
