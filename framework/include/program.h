@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "core.h"
+#include "glm/glm.hpp"
 
 enum SHADER_TYPE
 {
@@ -28,6 +29,7 @@ public:
 	void setUniform3f(const std::string& key, const float& x, const float& y, const float& z);
 	void setUniform3fv(const std::string& key, const float* vec);
 	void setUniform1i(const std::string& key, const int& value);
+	void setUniformMatrix4fv(const std::string& key, const glm::mat4& mat);
 
 private:
 	GLuint m_program;

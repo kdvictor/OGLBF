@@ -2,6 +2,8 @@
 #include "checkError.h"
 #include <iostream>
 
+#include "glm/gtc/type_ptr.hpp"
+
 Program::Program()
 {
 	m_program = GL_CALL(glCreateProgram());
@@ -28,7 +30,7 @@ void Program::build()
 	int success = 0;
 	char info[1024];
 	GL_CALL(glLinkProgram(m_program));
-	GL_CALL(glGetProgramiv(m_program, GL_COMPILE_STATUS, &success));
+	GL_CALL(glGetProgramiv(m_program, GL_LINK_STATUS, &success));
 	if (!success)
 	{
 		GL_CALL(glGetProgramInfoLog(m_program, 1024, NULL, info));
@@ -71,20 +73,30 @@ void Program::attachShader(const int& type, const char* const src)
 
 void Program::setUniform1f(const std::string& key, const float& value)
 {
-
+	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
+	GL_CALL(glUniform1f(location, value));
 }
 
 void Program::setUniform3f(const std::string& key, const float& x, const float& y, const float& z)
 {
-
+	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
+	GL_CALL(glUniform3f(location, x, y, z));
 }
 
 void Program::setUniform3fv(const std::string& key, const float* vec)
 {
-
+	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
+	GL_CALL(glUniform3fv(location, 1, vec));
 }
 
 void Program::setUniform1i(const std::string& key, const int& value)
 {
+	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
+	GL_CALL(glUniform1i(location, value));
+}
 
+void Program::setUniformMatrix4fv(const std::string& key, const glm::mat4& mat)
+{
+	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
+	GL_CALL(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat)));
 }
