@@ -27,6 +27,9 @@ message("thirdyParty srcs: ${THIRDPARTY_SOURCES}")
 include_directories(
 "${CMAKE_CURRENT_LIST_DIR}/thirdParty/include"
 "${CMAKE_CURRENT_LIST_DIR}/asserts/include"
+"${CMAKE_CURRENT_LIST_DIR}/framework/include"
+"${CMAKE_CURRENT_LIST_DIR}/wrapper/include"
+"${CMAKE_CURRENT_LIST_DIR}/app/include"
 )
 
 #set link dir
@@ -36,7 +39,10 @@ link_directories(
 
 #sub directories
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/asserts")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/framework")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/wrapper")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/app")
 
 add_executable(${PROJECT_NAME} ${MAIN_SRCS} ${THIRDPARTY_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} glfw3)
+target_link_libraries(${PROJECT_NAME} glfw3 fw app wrapper)
