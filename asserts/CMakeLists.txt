@@ -1,3 +1,6 @@
+#copy asserts to des
+file(COPY "./model" DESTINATION "${CMAKE_BINARY_DIR}/asserts")
+
 #get shaders
 set(SHADERS)
 file(GLOB_RECURSE VS_SHADER "${CMAKE_CURRENT_LIST_DIR}/*.vs")
