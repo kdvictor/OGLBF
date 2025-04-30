@@ -30,6 +30,7 @@ public:
 	void setUniform3fv(const std::string& key, const float* vec);
 	void setUniform1i(const std::string& key, const int& value);
 	void setUniformMatrix4fv(const std::string& key, const glm::mat4& mat);
+	void setUniform4fv(const std::string& key, const float* vec);
 
 private:
 	GLuint m_program;

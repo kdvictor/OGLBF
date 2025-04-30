@@ -97,6 +97,12 @@ void render()
 	program->setUniformMatrix4fv("V", view);
 	program->setUniformMatrix4fv("P", projection);
 
+	//light
+	float ambientLightColor[4] = { 0.4,0.4,0.4,1.0 };
+	float ambientMaterialColor[4] = { 0.4,0.4,0.4,1.0 };
+	program->setUniform4fv("ambientLightColor", ambientLightColor);
+	program->setUniform4fv("ambientMaterialColor", ambientMaterialColor);
+
 	//bind vao
 	GL_CALL(glBindVertexArray(vao));
 

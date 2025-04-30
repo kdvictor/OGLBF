@@ -100,3 +100,9 @@ void Program::setUniformMatrix4fv(const std::string& key, const glm::mat4& mat)
 	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
 	GL_CALL(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat)));
 }
+
+void Program::setUniform4fv(const std::string& key, const float* vec)
+{
+	auto location = GL_CALL(glGetUniformLocation(m_program, key.c_str()));
+	GL_CALL(glUniform4fv(location, 1, vec));
+}

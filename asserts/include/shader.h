@@ -16,15 +16,18 @@ uniform mat4 P;
 void main()
 {
 	gl_Position = P * V * M * vec4(inPos, 1.0);
-	//gl_Position = vec4(inPos, 1.0);
 })";
 
 //fs
 const char* const AMBIENT_FS = R"(#version 460 core
 
+uniform vec4 ambientLightColor;
+uniform vec4 ambientMaterialColor;
+
 out vec4 FragColor;
 
 void main()
 {
-	FragColor = vec4(1.0,1.0,1.0,1.0);
+	vec4 ambientColor = ambientLightColor * ambientMaterialColor;
+	FragColor = ambientColor;
 })";
