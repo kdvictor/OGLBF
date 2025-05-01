@@ -42,8 +42,8 @@ void onResize(const int& width, const int& height)
 void buildProgram()
 {
 	program = new Program();
-	program->attachShader(VERTEX, DIFFUSE_VS);
-	program->attachShader(FRAGMENT, DIFFUSE_FS);
+	program->attachShader(VERTEX, SPECULAR_VS);
+	program->attachShader(FRAGMENT, SPECULAR_FS);
 	program->build();
 }
 
@@ -106,13 +106,17 @@ void render()
 
 	//light
 	float ambientStrength = 0.1;
-	float lightPos[3] = { 100.0,100.0,0.0 };
-	float lightColor[4] = { 1.0,1.0,1.0,1.0 };
-	float objColor[4] = { 0.4,0.4,0.4,1.0 };
+	float lightPos[3] = { 1.0f,1.0f,0.0f };
+	float lightColor[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float objColor[4] = { 0.4f,0.4f,0.4f,1.0f };
+	float camerPos[3] = { 0.0f,0.0f,0.0f };
+	float shiness = 32.0f;
 	program->setUniform1f("ambientStrength", ambientStrength);
 	program->setUniform4fv("lightColor", lightColor);
 	program->setUniform4fv("objColor", objColor);
 	program->setUniform3fv("lightPos", lightPos);
+	program->setUniform1f("shiness", shiness);
+	program->setUniform3fv("camerPos", camerPos);
 
 	//bind vao
 	GL_CALL(glBindVertexArray(vao));
