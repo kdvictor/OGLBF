@@ -1,12 +1,14 @@
 #version 460 core
 
-uniform vec4 ambientLightColor;
-uniform vec4 ambientMaterialColor;
+uniform float ambientStrength;
+uniform vec4 lightColor;
+uniform vec4 objColor;
 
 out vec4 FragColor;
 
 void main()
 {
-	vec4 ambientColor = ambientLightColor * ambientMaterialColor;
+	vec4 ambientLightColor = ambientStrength * lightColor;
+	vec4 ambientColor = ambientLightColor * objColor;
 	FragColor = ambientColor;
 }

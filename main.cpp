@@ -9,6 +9,7 @@
 #include "glm/common.hpp"
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "glm/gtc/matrix_inverse.hpp"
 #include "objmodel.h"
 
 GLuint vao;
@@ -92,16 +93,19 @@ void render()
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+	glm::mat4 NM = glm::inverseTranspose(view * model);
 
 	program->setUniformMatrix4fv("M", model);
 	program->setUniformMatrix4fv("V", view);
 	program->setUniformMatrix4fv("P", projection);
 
 	//light
-	float ambientLightColor[4] = { 0.4,0.4,0.4,1.0 };
-	float ambientMaterialColor[4] = { 0.4,0.4,0.4,1.0 };
-	program->setUniform4fv("ambientLightColor", ambientLightColor);
-	program->setUniform4fv("ambientMaterialColor", ambientMaterialColor);
+	float ambientStrength = 0.1;
+	float lightColor[4] = { 1.0,1.0,1.0,1.0 };
+	float objColor[4] = { 0.4,0.4,0.4,1.0 };
+	program->setUniform1f("ambientStrength", ambientStrength);
+	program->setUniform4fv("lightColor", lightColor);
+	program->setUniform4fv("objColor", objColor);
 
 	//bind vao
 	GL_CALL(glBindVertexArray(vao));
