@@ -18,5 +18,6 @@ foreach(shader IN LISTS SHADERS)
 endforeach()
 
 #write shader content to header
+file(REMOVE "${CMAKE_CURRENT_LIST_DIR}/include/shader.h")
 configure_file("${CMAKE_CURRENT_LIST_DIR}/shader.h.in"
 				"${CMAKE_CURRENT_LIST_DIR}/include/shader.h" @ONLY)

@@ -2,6 +2,8 @@
 
 //vs
 const char* const AMBIENT_VS = R"(@AMBIENT_VS@)";
+const char* const DIFFUSE_VS = R"(@DIFFUSE_VS@)";
 
 //fs
 const char* const AMBIENT_FS = R"(@AMBIENT_FS@)";
+const char* const DIFFUSE_FS = R"(@DIFFUSE_FS@)";

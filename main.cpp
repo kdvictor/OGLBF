@@ -42,8 +42,8 @@ void onResize(const int& width, const int& height)
 void buildProgram()
 {
 	program = new Program();
-	program->attachShader(VERTEX, AMBIENT_VS);
-	program->attachShader(FRAGMENT, AMBIENT_FS);
+	program->attachShader(VERTEX, DIFFUSE_VS);
+	program->attachShader(FRAGMENT, DIFFUSE_FS);
 	program->build();
 }
 
@@ -90,22 +90,29 @@ void render()
 {
 	GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
 	program->start();
-	glm::mat4 model = glm::mat4(1.0f);
-	glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-	glm::mat4 NM = glm::inverseTranspose(view * model);
+	glm::mat4 model = glm::translate<float>(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-5.0f));
+
+	//glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 view = glm::mat4(1.0f);
+	//glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 1000.0f);
+	glm::mat4 NM = glm::transpose(glm::inverse(glm::mat4( model)));
 
 	program->setUniformMatrix4fv("M", model);
 	program->setUniformMatrix4fv("V", view);
 	program->setUniformMatrix4fv("P", projection);
+	program->setUniformMatrix4fv("NM", NM);
+
 
 	//light
 	float ambientStrength = 0.1;
+	float lightPos[3] = { 100.0,100.0,0.0 };
 	float lightColor[4] = { 1.0,1.0,1.0,1.0 };
 	float objColor[4] = { 0.4,0.4,0.4,1.0 };
 	program->setUniform1f("ambientStrength", ambientStrength);
 	program->setUniform4fv("lightColor", lightColor);
 	program->setUniform4fv("objColor", objColor);
+	program->setUniform3fv("lightPos", lightPos);
 
 	//bind vao
 	GL_CALL(glBindVertexArray(vao));
@@ -136,6 +143,9 @@ int main()
 	//set viewport and color
 	GL_CALL(glViewport(0, 0, 800, 600));
 	GL_CALL(glClearColor(0.0, 0.0, 0.0, 1.0));
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	//loop
 	while (_app.update())
